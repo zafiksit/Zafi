@@ -372,13 +372,15 @@ async def check_game():
 
 
 # =========================
-#   ДЛЯ ЛОАДЕРА `/loadmodb`
+#     Совместимость с /loadmodb
 # =========================
 
-def get_router():
-    """Для лоадеров, которые ищут get_router()."""
-    return router
-
+def register_handlers(dp):
+    """
+    Старые загрузчики модулей ищут именно эту функцию.
+    Aiogram 3 поддерживает include_router, поэтому просто подключаем router.
+    """
+    dp.include_router(router)
 
 async def start_module():
     """Если лоадер вызывает start_module()."""
